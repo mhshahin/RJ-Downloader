@@ -13,7 +13,7 @@ def get_download_link(link):
         url = str(json.loads(response.text)['host']) + "/media/podcast/mp3-256/" + file_name + ".mp3"
     elif media_type == "mp3s":
         response = session.get("https://www.radiojavan.com/mp3s/mp3_host/?id=%s" %(file_name))
-        url = str(json.loads(response.text)['host']) + "/media/mp3/mp3-256/" + file_name + ".mp3"
+        url = str(json.loads(response.text)['host']) + "/media/mp3/" + file_name + ".mp3"
 
     return url
 
