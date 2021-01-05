@@ -1,7 +1,10 @@
+import logging
+
 import requests
 import json
 import re
 from subprocess import call
+import validators
 
 
 def get_download_link(link):
@@ -22,8 +25,19 @@ def get_download_link(link):
 
 
 if __name__ == "__main__":
-    media_link = input("Enter a link: ")
-    download_link = get_download_link(media_link)
+    while True:
+        media_link = input("Enter a link: ")
+        if not validators.url(media_link):
+            print("Please input a valid URL")
+            continue
+        break
+
+    download_link = None
+    try:
+        download_link = get_download_link(media_link)
+    except Exception as e:
+        logging.exception(e)
+
     if download_link:
         call(["wget", download_link])
     else:
